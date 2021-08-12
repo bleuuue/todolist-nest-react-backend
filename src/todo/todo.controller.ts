@@ -1,6 +1,15 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
+import { ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateTodoDto } from './dtos/createTodo.dto';
+import { UpdateTodoDto } from './dtos/updateTodo.dto';
 import { Todo } from './entities/todo.entity';
 import { TodoService } from './todo.service';
 
@@ -27,5 +36,28 @@ export class TodoController {
   @Get()
   async getTodos() {
     return await this.todoService.getTodos();
+  }
+
+  @ApiParam({
+    name: 'todoId',
+    required: true,
+    description: '투두리스트 아이디',
+  })
+  @Put(':todoId')
+  async updateTodo(
+    @Param() param: { todoId: string },
+    @Body() updateTodoDto: UpdateTodoDto,
+  ) {
+    return await this.todoService.updateTodo(param, updateTodoDto);
+  }
+
+  @ApiParam({
+    name: 'todoId',
+    required: true,
+    description: '투두리스트 아이디',
+  })
+  @Delete(':todoId')
+  async deleteTodo(@Param() param: { todoId: string }) {
+    return await this.todoService.deleteTodo(param);
   }
 }
