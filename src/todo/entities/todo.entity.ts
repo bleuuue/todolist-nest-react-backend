@@ -1,18 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString } from 'class-validator';
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Common } from 'src/common/common.entity';
+import { Column, Entity } from 'typeorm';
 
 @Entity()
-export class Todo {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Todo extends Common {
   @IsString()
   @ApiProperty({
     example: 'Eat',
@@ -31,10 +23,4 @@ export class Todo {
 
   @Column('boolean', { default: false })
   isDone: boolean;
-
-  @CreateDateColumn()
-  createAt: Date;
-
-  @UpdateDateColumn()
-  updataAt: Date;
 }
