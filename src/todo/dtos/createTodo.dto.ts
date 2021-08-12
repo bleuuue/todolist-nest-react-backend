@@ -1,9 +1,4 @@
-import { IsString } from 'class-validator';
+import { PickType } from '@nestjs/swagger';
+import { Todo } from '../entities/todo.entity';
 
-export class CreateTodoDto {
-  @IsString()
-  title: string;
-
-  @IsString()
-  desc: string;
-}
+export class CreateTodoDto extends PickType(Todo, ['title', 'desc'] as const) {}

@@ -1,3 +1,5 @@
+import { ApiProperty } from '@nestjs/swagger';
+import { IsString } from 'class-validator';
 import {
   Column,
   CreateDateColumn,
@@ -11,9 +13,19 @@ export class Todo {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @IsString()
+  @ApiProperty({
+    example: 'Eat',
+    description: '투두 리스트의 제목',
+  })
   @Column('varchar')
   title: string;
 
+  @IsString()
+  @ApiProperty({
+    example: 'get energy',
+    description: '투두 리스트 실행',
+  })
   @Column('varchar')
   desc: string;
 
