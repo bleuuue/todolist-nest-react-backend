@@ -42,4 +42,15 @@ export class TodoService {
   async deleteTodo(param: { todoId: string }) {
     return await this.todoRepository.delete(param.todoId);
   }
+
+  async toggleComplete(param: { todoId: string }) {
+    const todo = await this.todoRepository.findOne({
+      where: {
+        id: +param.todoId,
+      },
+    });
+    todo.isComplete = !todo.isComplete;
+
+    return await this.todoRepository.save(todo);
+  }
 }
