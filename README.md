@@ -1,4 +1,4 @@
-# todolist-nest-react-frontend
+# todolist-nest-react-backend
 
 ## **[ About ]**
 > ### **Todolist**
